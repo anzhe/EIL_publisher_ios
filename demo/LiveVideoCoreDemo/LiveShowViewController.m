@@ -124,20 +124,26 @@
 -(void) RtmpInit{
     dispatch_async(dispatch_get_main_queue(), ^{
         CGSize videosize;
-        
+        LIVE_BITRATE vBitRate;
         if (self.IsHorizontal) {
-            if(self.IsD1)
+            if(self.IsD1){
                 videosize = LIVE_VIEDO_SIZE_HORIZONTAL_720P;
-            else
+                vBitRate = LIVE_BITRATE_1Mbps;
+            }else{
                 videosize = LIVE_VIEDO_SIZE_HORIZONTAL_CIF;
+                vBitRate = LIVE_BITRATE_600Kbps;
+            }
         }else{
-            if(self.IsD1)
+            if(self.IsD1){
                 videosize = LIVE_VIEDO_SIZE_720P;
-            else
+                vBitRate = LIVE_BITRATE_1Mbps;
+            }else{
                 videosize = LIVE_VIEDO_SIZE_CIF;
+                vBitRate = LIVE_BITRATE_600Kbps;
+            }
         }
       //  [[LiveVideoCoreSDK sharedinstance] LiveInit:RtmpUrl Preview:_AllBackGroudView VideSize:videosize BitRate:LIVE_BITRATE_800Kbps FrameRate:LIVE_VIDEO_DEF_FRAMERATE highQuality:true];
-        [[LiveVideoCoreSDK sharedinstance] EILLiveInit:RtmpUrl Preview:_AllBackGroudView VideSize:videosize BitRate:LIVE_BITRATE_800Kbps FrameRate:LIVE_VIDEO_DEF_FRAMERATE highQuality:true];
+        [[LiveVideoCoreSDK sharedinstance] EILLiveInit:RtmpUrl Preview:_AllBackGroudView VideSize:videosize BitRate:vBitRate FrameRate:LIVE_VIDEO_DEF_FRAMERATE highQuality:true];
         [LiveVideoCoreSDK sharedinstance].delegate = self;
         [[LiveVideoCoreSDK sharedinstance] EILConnect];
         NSLog(@"Rtmp[%@] is connecting", self.RtmpUrl);
