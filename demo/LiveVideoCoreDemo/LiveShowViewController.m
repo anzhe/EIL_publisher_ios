@@ -142,6 +142,11 @@
                 vBitRate = LIVE_BITRATE_600Kbps;
             }
         }
+        
+        if(_fVideoBitRate>=100 && _fVideoBitRate<=3000){
+            vBitRate = _fVideoBitRate*1000;
+        }
+        
       //  [[LiveVideoCoreSDK sharedinstance] LiveInit:RtmpUrl Preview:_AllBackGroudView VideSize:videosize BitRate:LIVE_BITRATE_800Kbps FrameRate:LIVE_VIDEO_DEF_FRAMERATE highQuality:true];
         [[LiveVideoCoreSDK sharedinstance] EILLiveInit:RtmpUrl Preview:_AllBackGroudView VideSize:videosize BitRate:vBitRate FrameRate:LIVE_VIDEO_DEF_FRAMERATE highQuality:true];
         [LiveVideoCoreSDK sharedinstance].delegate = self;
