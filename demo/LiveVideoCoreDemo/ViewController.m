@@ -158,8 +158,8 @@
     [self UIInit];
     
     //rtmp://pili-live-rtmp.qdtong.net/leju-live-2/faf0c4
-    _RtmpUrlTextField.text = @"rtmp://pili-publish.qdtong.net/leju-live-2/1c9f0c?key=c271aa1b4589f024&token=ejutest";
-    //_RtmpUrlTextField.text = @"rtmp://ossrs.net/live/mao1";
+    //_RtmpUrlTextField.text = @"rtmp://pili-publish.qdtong.net/leju-live-2/1c9f0c?key=c271aa1b4589f024&token=ejutest";
+    _RtmpUrlTextField.text = @"rtmp://ossrs.net/live/mao1";
 }
 
 - (void)didReceiveMemoryWarning {
