@@ -61,6 +61,8 @@ typedef NS_ENUM(NSUInteger, LIVE_FILTER_TYPE) {
 @property (atomic, assign) float micGain;//0~1.0
 
 - (void)EILLiveInit:(UIView*)previewView;
+- (void)EILLiveInit:(UIView*)previewView VideSize:(CGSize)videSize BitRate:(LIVE_BITRATE)iBitRate FrameRate:(LIVE_FRAMERATE)iFrameRate  highQuality:(Boolean)bhighQuality;
+
 - (void)EILLiveInit:(NSURL*)rtmpUrl Preview:(UIView*)previewView;
 - (void)EILLiveInit:(NSURL*)rtmpUrl Preview:(UIView*)previewView VideSize:(CGSize)videSize BitRate:(LIVE_BITRATE)iBitRate FrameRate:(LIVE_FRAMERATE)iFrameRate  highQuality:(Boolean)bhighQuality;
 
