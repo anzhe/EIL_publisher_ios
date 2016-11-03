@@ -74,6 +74,7 @@ typedef NS_ENUM(NSUInteger, LIVE_FILTER_TYPE) {
 
 - (void)EILSetCameraFront:(Boolean)bCameraFrontFlag;
 - (void)EILSetFilter:(LIVE_FILTER_TYPE) type;
+- (void)EILSetWatermark:(UIImage*)image withRect:(CGRect)rect;
 
 - (void)EILFocuxAtPoint:(CGPoint)point;
 //VCSessionDelegate protocal
