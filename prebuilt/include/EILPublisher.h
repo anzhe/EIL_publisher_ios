@@ -18,7 +18,7 @@
 #define LIVE_VIEDO_SIZE_720P (CGSizeMake(720, 1280))
 
 typedef NS_ENUM(NSUInteger, LIVE_BITRATE) {
-    LIVE_BITRATE_1Mbps=1500000,
+    LIVE_BITRATE_1Mbps=1000000,
     LIVE_BITRATE_800Kbps=800000,
     LIVE_BITRATE_600Kbps=600000,
     LIVE_BITRATE_300Kbps=300000
@@ -38,7 +38,10 @@ typedef NS_ENUM(NSInteger, LIVE_VCSessionState)
     LIVE_VCSessionStateStarting,
     LIVE_VCSessionStateStarted,
     LIVE_VCSessionStateEnded,
-    LIVE_VCSessionStateError
+    LIVE_VCSessionStateError,
+    LIVE_VCSessionStateError_DNSFailed,
+    LIVE_VCSessionStateError_ConnectFailed,
+    LIVE_VCSessionStateError_Unknow,
 };
 
 typedef NS_ENUM(NSUInteger, LIVE_FILTER_TYPE) {
@@ -75,6 +78,7 @@ typedef NS_ENUM(NSUInteger, LIVE_FILTER_TYPE) {
 - (void)EILSetCameraFront:(Boolean)bCameraFrontFlag;
 - (void)EILSetFilter:(LIVE_FILTER_TYPE) type;
 - (void)EILSetWatermark:(UIImage*)image withRect:(CGRect)rect;
+- (void)EILCloseWatermark;
 
 - (void)EILFocuxAtPoint:(CGPoint)point;
 //VCSessionDelegate protocal

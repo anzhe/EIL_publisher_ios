@@ -43,8 +43,9 @@ typedef NS_ENUM(NSInteger, VCSessionState)
     VCSessionStateStarting,
     VCSessionStateStarted,
     VCSessionStateEnded,
-    VCSessionStateError
-
+    VCSessionStateError,
+    VCSessionStateError_DNS,
+    VCSessionStateError_Connect
 };
 
 typedef NS_ENUM(NSInteger, VCCameraState)
@@ -155,5 +156,8 @@ typedef NS_ENUM(NSInteger, VCFilter) {
 
 - (void) addPixelBufferSource: (UIImage*) image
                      withRect: (CGRect) rect;
+
+- (void) deletePixelBufferSource;
+
 
 @end

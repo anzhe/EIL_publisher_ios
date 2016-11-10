@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B3BF9A751DAA43F700328720 /* libeilpublisher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3BF9A741DAA43F700328720 /* libeilpublisher.a */; };
+		B3CF79811DD40EB9008394C2 /* 27.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B3CF79801DD40EB9008394C2 /* 27.jpg */; };
 		B73752F01CAA5630007FBCA0 /* ASValuePopUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = B73752ED1CAA5630007FBCA0 /* ASValuePopUpView.m */; };
 		B73752F11CAA5630007FBCA0 /* ASValueTrackingSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = B73752EF1CAA5630007FBCA0 /* ASValueTrackingSlider.m */; };
 		B73752F51CAA8688007FBCA0 /* ZJSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = B73752F41CAA8688007FBCA0 /* ZJSwitch.m */; };
@@ -52,6 +53,7 @@
 /* Begin PBXFileReference section */
 		B3BF9A6F1DAA3DC100328720 /* libLiveVideoCoreSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libLiveVideoCoreSDK.a; path = ../prebuilt/libs/libLiveVideoCoreSDK.a; sourceTree = "<group>"; };
 		B3BF9A741DAA43F700328720 /* libeilpublisher.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libeilpublisher.a; path = ../prebuilt/libs/libeilpublisher.a; sourceTree = "<group>"; };
+		B3CF79801DD40EB9008394C2 /* 27.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 27.jpg; sourceTree = "<group>"; };
 		B73752EC1CAA5630007FBCA0 /* ASValuePopUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASValuePopUpView.h; sourceTree = "<group>"; };
 		B73752ED1CAA5630007FBCA0 /* ASValuePopUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASValuePopUpView.m; sourceTree = "<group>"; };
 		B73752EE1CAA5630007FBCA0 /* ASValueTrackingSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASValueTrackingSlider.h; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 		B78280111C86C95E0057E507 /* LiveVideoCoreDemo */ = {
 			isa = PBXGroup;
 			children = (
+				B3CF79801DD40EB9008394C2 /* 27.jpg */,
 				B73752F21CAA8675007FBCA0 /* ZJSwitch */,
 				B73752EB1CAA5630007FBCA0 /* ASValueTrackingSlider */,
 				B78280651C86E7F90057E507 /* XMNShareMenu */,
@@ -356,6 +359,7 @@
 			files = (
 				B78280221C86C95E0057E507 /* LaunchScreen.storyboard in Resources */,
 				B782801F1C86C95E0057E507 /* Assets.xcassets in Resources */,
+				B3CF79811DD40EB9008394C2 /* 27.jpg in Resources */,
 				B782801D1C86C95E0057E507 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -72,7 +72,7 @@
     _FilterButton.backgroundColor = [UIColor blueColor];
     _FilterButton.layer.masksToBounds = YES;
     _FilterButton.layer.cornerRadius  = 5;
-    [_FilterButton setTitle:@"滤镜" forState:UIControlStateNormal];
+    [_FilterButton setTitle:@"打开水印" forState:UIControlStateNormal];
     [_FilterButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _FilterButton.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:12];
     [_FilterButton addTarget:self action:@selector(OnFilterClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -148,9 +148,9 @@
         }
         
       //  [[LiveVideoCoreSDK sharedinstance] LiveInit:RtmpUrl Preview:_AllBackGroudView VideSize:videosize BitRate:LIVE_BITRATE_800Kbps FrameRate:LIVE_VIDEO_DEF_FRAMERATE highQuality:true];
-        [[LiveVideoCoreSDK sharedinstance] EILLiveInit:_AllBackGroudView VideSize:videosize BitRate:vBitRate FrameRate:LIVE_VIDEO_DEF_FRAMERATE highQuality:true];
+        [[LiveVideoCoreSDK sharedinstance] EILLiveInit:RtmpUrl Preview:_AllBackGroudView VideSize:videosize BitRate:vBitRate FrameRate:LIVE_VIDEO_DEF_FRAMERATE highQuality:true];
         [LiveVideoCoreSDK sharedinstance].delegate = self;
-        [[LiveVideoCoreSDK sharedinstance] EILConnect:RtmpUrl];
+        [[LiveVideoCoreSDK sharedinstance] EILConnect];
         NSLog(@"Rtmp[%@] is connecting", self.RtmpUrl);
         
         [LiveVideoCoreSDK sharedinstance].micGain = 5;
@@ -174,6 +174,21 @@
 }
 
 -(void) OnFilterClicked:(id)sender{
+#if 1 // 测试水印功能
+    //- (void)EILAddPixelBufferSource:(UIImage*)image withRect:(CGRect)rect
+    UIImage *myImage = [UIImage imageNamed:@"27.jpg"];
+    static bool bWatermark = false;
+    
+    if(bWatermark==false){
+        [[LiveVideoCoreSDK sharedinstance] EILSetWatermark:myImage withRect:CGRectMake(200, 200, 200, 200)];
+        bWatermark = true;
+        [_FilterButton setTitle:@"关闭水印" forState:UIControlStateNormal];
+    }else{
+        [[LiveVideoCoreSDK sharedinstance] EILCloseWatermark];
+        bWatermark = false;
+        [_FilterButton setTitle:@"打开水印" forState:UIControlStateNormal];
+    }
+#else
     NSArray *shareAry = @[@{kXMNShareImage:@"original_Image",
                             kXMNShareHighlightImage:@"original_Image",
                             kXMNShareTitle:@"原始"},
@@ -194,7 +209,7 @@
     label.textColor = [UIColor colorWithRed:94/255.0 green:94/255.0 blue:94/255.0 alpha:1.0];;
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont systemFontOfSize:15];
-    label.text = @"滤镜:";
+    label.text = @"水印:";
     [headerView addSubview:label];
     
     _FilterMenu = [[XMNShareView alloc] init];
@@ -229,6 +244,7 @@
     [_FilterMenu setupShareViewWithItems:shareAry];
     
     [_FilterMenu showUseAnimated:YES];
+#endif
 }
 
 -(void) OnExitClicked:(id)sender{
@@ -356,6 +372,12 @@
                 break;
             case LIVE_VCSessionStateError:
                 _RtmpStatusLabel.text = @"RTMP状态: 错误";
+                break;
+            case LIVE_VCSessionStateError_DNSFailed:
+                _RtmpStatusLabel.text = @"RTMP状态: DNS错误";
+                break;
+            case LIVE_VCSessionStateError_ConnectFailed:
+                _RtmpStatusLabel.text = @"RTMP状态: Connect错误";
                 break;
             default:
                 break;
