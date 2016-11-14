@@ -158,7 +158,7 @@
     [self UIInit];
     
     //rtmp://pili-live-rtmp.qdtong.net/leju-live-2/faf0c4
-    //_RtmpUrlTextField.text = @"rtmp://pili-publish.qdtong.net/leju-live-2/8c2604?key=203492d13b46ca41&token=ejutest";
+    //_RtmpUrlTextField.text = @"rtmp://pili-publish.qdtong.net/leju-live-2/71c0c9?key=099d35a9e6f8a26f&token=ejutest";
     _RtmpUrlTextField.text = @"rtmp://ossrs.net/live/mao5";
     //_RtmpUrlTextField.text = @"rtmp://rtmppush.ejucloud.com/ehoush/sample";
 }
