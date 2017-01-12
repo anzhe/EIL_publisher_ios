@@ -16,6 +16,7 @@
 @property (atomic, assign) Boolean IsHorizontal;
 @property (atomic, assign) int fVideoSize;
 @property (atomic, assign) Boolean IsD1;
+@property (atomic, assign) Boolean bNetworkStrategy;
 @property (atomic, assign) int fVideoBitRate;
 
 

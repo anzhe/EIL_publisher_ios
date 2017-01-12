@@ -31,6 +31,11 @@ typedef NS_ENUM(NSUInteger, LIVE_FRAMERATE) {
     LIVE_FRAMERATE_15=15
 };
 
+typedef NS_ENUM(NSUInteger, LIVE_NETWORK_STRATEGY) {
+    LIVE_NETWORK_STRATEGY_FRAME=0,
+    LIVE_NETWORK_STRATEGY_BITRATE=1
+};
+
 typedef NS_ENUM(NSInteger, LIVE_VCSessionState)
 {
     LIVE_VCSessionStateNone,
@@ -54,6 +59,10 @@ typedef NS_ENUM(NSUInteger, LIVE_FILTER_TYPE) {
 @protocol LIVEVCSessionDelegate <NSObject>
 @required
 - (void) LiveConnectionStatusChanged: (LIVE_VCSessionState) sessionState;
+
+@optional
+- (void) LiveConnectionStreamStatus:(struct StreamStatus_s) state;
+
 @end
 
 @interface LiveVideoCoreSDK : NSObject<VCSessionDelegate>
@@ -63,16 +72,16 @@ typedef NS_ENUM(NSUInteger, LIVE_FILTER_TYPE) {
 @property (nonatomic, weak)   id<LIVEVCSessionDelegate> delegate;
 @property (atomic, assign) float micGain;//0~1.0
 
-- (void)EILLiveInit:(UIView*)previewView;
-- (void)EILLiveInit:(UIView*)previewView VideSize:(CGSize)videSize BitRate:(LIVE_BITRATE)iBitRate FrameRate:(LIVE_FRAMERATE)iFrameRate  highQuality:(Boolean)bhighQuality;
 
-- (void)EILLiveInit:(NSURL*)rtmpUrl Preview:(UIView*)previewView;
-- (void)EILLiveInit:(NSURL*)rtmpUrl Preview:(UIView*)previewView VideSize:(CGSize)videSize BitRate:(LIVE_BITRATE)iBitRate FrameRate:(LIVE_FRAMERATE)iFrameRate  highQuality:(Boolean)bhighQuality;
-
+- (BOOL)EILLiveInitPreview:(UIView*)view
+            videSize:(CGSize)videSize
+            bitRate:(LIVE_BITRATE)iBitRate
+            frameRate:(LIVE_FRAMERATE)iFrameRate
+            highQuality:(Boolean)bhighQuality
+            networkStrategy:(LIVE_NETWORK_STRATEGY)strategy;
 - (void)EILLiveRelease;
 
-- (void)EILConnect:(NSURL*)rtmpUrl;
-- (void)EILConnect;
+- (BOOL)EILConnect:(NSURL*)rtmpUrl;
 - (void)EILDisconnect;
 
 - (void)EILSetCameraFront:(Boolean)bCameraFrontFlag;

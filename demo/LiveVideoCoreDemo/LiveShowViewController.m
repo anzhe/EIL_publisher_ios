@@ -14,6 +14,7 @@
     UIView* _AllBackGroudView;
     UIButton* _ExitButton;
     UILabel*  _RtmpStatusLabel;
+    UILabel*  _StreamStatusLabel;
     UIButton* _FilterButton;
     UIButton* _CameraChangeButton;
     XMNShareView* _FilterMenu;
@@ -63,6 +64,19 @@
     [_RtmpStatusLabel setTextColor:[UIColor whiteColor]];
     _RtmpStatusLabel.text = @"RTMP状态: 未连接";
     [self.view addSubview:_RtmpStatusLabel];
+    
+    fRtmpStatusLabelW = 240;
+    fRtmpStatusLabelH = 20;
+    fRtmpStatusLabelX = 10;
+    fRtmpStatusLabelY = 60;
+    _StreamStatusLabel = [[UILabel alloc] initWithFrame:CGRectMake(fRtmpStatusLabelX, fRtmpStatusLabelY, fRtmpStatusLabelW, fRtmpStatusLabelH)];
+    _StreamStatusLabel.backgroundColor = [UIColor lightGrayColor];
+    _StreamStatusLabel.layer.masksToBounds = YES;
+    _StreamStatusLabel.layer.cornerRadius  = 5;
+    _StreamStatusLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:10];
+    [_StreamStatusLabel setTextColor:[UIColor whiteColor]];
+    _StreamStatusLabel.text = @"Stream状态: ";
+    [self.view addSubview:_StreamStatusLabel];
     
     float fFilterButtonW = 50;
     float fFilterButtonH = 30;
@@ -125,6 +139,7 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         CGSize videosize;
         LIVE_BITRATE vBitRate;
+        LIVE_NETWORK_STRATEGY vNetStrategy;
         if (self.IsHorizontal) {
             if(self.IsD1){
                 videosize = LIVE_VIEDO_SIZE_HORIZONTAL_720P;
@@ -147,10 +162,16 @@
             vBitRate = _fVideoBitRate*1000;
         }
         
+        if(self.bNetworkStrategy){
+            vNetStrategy = LIVE_NETWORK_STRATEGY_BITRATE;
+        }else{
+            vNetStrategy = LIVE_NETWORK_STRATEGY_FRAME;
+        }
+        
       //  [[LiveVideoCoreSDK sharedinstance] LiveInit:RtmpUrl Preview:_AllBackGroudView VideSize:videosize BitRate:LIVE_BITRATE_800Kbps FrameRate:LIVE_VIDEO_DEF_FRAMERATE highQuality:true];
-        [[LiveVideoCoreSDK sharedinstance] EILLiveInit:RtmpUrl Preview:_AllBackGroudView VideSize:videosize BitRate:vBitRate FrameRate:LIVE_VIDEO_DEF_FRAMERATE highQuality:true];
+        [[LiveVideoCoreSDK sharedinstance] EILLiveInitPreview:_AllBackGroudView videSize:videosize bitRate:vBitRate frameRate:LIVE_VIDEO_DEF_FRAMERATE highQuality:true networkStrategy:vNetStrategy];
         [LiveVideoCoreSDK sharedinstance].delegate = self;
-        [[LiveVideoCoreSDK sharedinstance] EILConnect];
+        [[LiveVideoCoreSDK sharedinstance] EILConnect:RtmpUrl];
         NSLog(@"Rtmp[%@] is connecting", self.RtmpUrl);
         
         [LiveVideoCoreSDK sharedinstance].micGain = 5;
@@ -158,6 +179,7 @@
         [self.view addSubview:_MicSlider];
         [self.view addSubview:_ExitButton];
         [self.view addSubview:_RtmpStatusLabel];
+        [self.view addSubview:_StreamStatusLabel];
         [self.view addSubview:_FilterButton];
         [self.view addSubview:_CameraChangeButton];
     });
@@ -383,6 +405,19 @@
                 break;
         }
     });
+}
+
+- (void) LiveConnectionStreamStatus:(struct StreamStatus_s) state{
+    
+    //NSLog(@"\nbitrate:%fkb/s lost frame:%f(%f%%)", state.allBitrate/1000, state.lostVideoFrame, state.lostVideoFrameRate);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        NSString *astring = [[NSString alloc] initWithString:[NSString stringWithFormat:@"bitrate:%.0fkb/s lost frame:%.0f(%.2f%%)", state.allBitrate/1000, state.lostVideoFrame, state.lostVideoFrameRate]];
+        NSLog(@"astring:%@",astring);
+        _StreamStatusLabel.text = astring;
+        
+            });
+
 }
 
 - (NSString *)slider:(ASValueTrackingSlider *)slider stringForValue:(float)value{

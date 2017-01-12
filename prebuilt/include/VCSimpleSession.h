@@ -70,9 +70,18 @@ typedef NS_ENUM(NSInteger, VCFilter) {
     VCFilterAntique
 };
 
+struct StreamStatus_s
+{
+    double allBitrate;
+    double lostVideoFrame;
+    double lostVideoFrameRate;
+};
+
 @protocol VCSessionDelegate <NSObject>
 @required
 - (void) connectionStatusChanged: (VCSessionState) sessionState;
+- (void) streamStatus: (struct StreamStatus_s) status;
+
 @optional
 - (void) didAddCameraSource:(VCSimpleSession*)session;
 
@@ -94,6 +103,7 @@ typedef NS_ENUM(NSInteger, VCFilter) {
 @property (nonatomic, assign) BOOL          orientationLocked;
 @property (nonatomic, assign) BOOL          torch;
 @property (nonatomic, assign) float         videoZoomFactor;
+@property (nonatomic, assign) int           networkStratgy;
 @property (nonatomic, assign) int           audioChannelCount;
 @property (nonatomic, assign) float         audioSampleRate;
 @property (nonatomic, assign) float         micGain;        // [0..1]

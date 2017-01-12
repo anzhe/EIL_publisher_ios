@@ -26,6 +26,9 @@
     UILabel* _videoSizeLabel;
     ZJSwitch* _videoSizeSwitch;
     
+    UILabel* _networkStratgyLabel;
+    ZJSwitch* _networkStratgySwitch;
+    
     UILabel* _VideoBitRateLabel;
     UITextField* _VideoBitRateTextField;
 }
@@ -85,6 +88,21 @@
         [self.view addSubview:_VideoBitRateTextField];
     }
     
+    // 网络策略选择
+    {
+        _networkStratgyLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, beginY+240, 150, 30)];
+        _networkStratgyLabel.text = @"网络策略(降帧,降码):";
+        _networkStratgyLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:12];
+        [self.view addSubview: _networkStratgyLabel];
+        
+        float fhorizontalSwitchX = 10 + 55 + 5+40+20;
+        float fhorizontalSwitchY = beginY+240;
+        float fhorizontalSwitchW = 30;
+        float fhorizontalSwitchH = 30;
+        _networkStratgySwitch = [[ZJSwitch alloc] initWithFrame:CGRectMake(fhorizontalSwitchX, fhorizontalSwitchY, fhorizontalSwitchW, fhorizontalSwitchH)];
+        [self.view addSubview:_networkStratgySwitch];
+    }
+    
     // RTMP URL
     {
         float fRtmpUrlTextFieldX = 10;
@@ -136,6 +154,7 @@
     _LiveShowViewController.RtmpUrl = [NSURL URLWithString:_RtmpUrlTextField.text];
     _LiveShowViewController.IsHorizontal = [_horizontalSwitch isOn];
     _LiveShowViewController.IsD1 = [_videoSizeSwitch isOn];
+    _LiveShowViewController.bNetworkStrategy = [_networkStratgySwitch isOn];
     
     NSString * strBitRate = _VideoBitRateTextField.text;
     _LiveShowViewController.fVideoBitRate = [strBitRate intValue];
@@ -158,7 +177,7 @@
     [self UIInit];
     
     //rtmp://pili-live-rtmp.qdtong.net/leju-live-2/faf0c4
-    //_RtmpUrlTextField.text = @"rtmp://pili-publish.qdtong.net/leju-live-2/71c0c9?key=099d35a9e6f8a26f&token=ejutest";
+    //_RtmpUrlTextField.text = @"rtmp://pili-publish.qdtong.net/leju-live-2/587715cf695d6?key=c68aee4f1df7612a&token=ejutest";
     _RtmpUrlTextField.text = @"rtmp://ossrs.net/live/mao5";
     //_RtmpUrlTextField.text = @"rtmp://rtmppush.ejucloud.com/ehoush/sample";
 }
