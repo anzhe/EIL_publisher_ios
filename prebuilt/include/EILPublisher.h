@@ -59,8 +59,7 @@ typedef NS_ENUM(NSUInteger, LIVE_FILTER_TYPE) {
 @protocol LIVEVCSessionDelegate <NSObject>
 @required
 - (void) LiveConnectionStatusChanged: (LIVE_VCSessionState) sessionState;
-
-@optional
+- (void) LiveDisconnectWithError: (NSError *)error;
 - (void) LiveConnectionStreamStatus:(struct StreamStatus_s) state;
 
 @end

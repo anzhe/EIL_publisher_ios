@@ -80,6 +80,7 @@ struct StreamStatus_s
 @protocol VCSessionDelegate <NSObject>
 @required
 - (void) connectionStatusChanged: (VCSessionState) sessionState;
+- (void) disconnectWithError: (NSError *)error;
 - (void) streamStatus: (struct StreamStatus_s) status;
 
 @optional
@@ -90,6 +91,8 @@ struct StreamStatus_s
 @end
 
 @interface VCSimpleSession : NSObject
+
++ (instancetype)sharedinstance;
 
 @property (nonatomic, readonly) VCSessionState rtmpSessionState;
 @property (nonatomic, strong, readonly) UIView* previewView;
@@ -149,6 +152,9 @@ struct StreamStatus_s
                         aspectMode:(VCAspectMode) aspectMode;
 
 // -----------------------------------------------------------------------------
+
+- (void) cleanup;
+
 
 - (void) startRtmpSessionWithURL:(NSString*) rtmpUrl
                     andStreamKey:(NSString*) streamKey;
