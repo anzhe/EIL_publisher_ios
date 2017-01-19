@@ -407,6 +407,17 @@
     });
 }
 
+- (void) LiveDisconnectWithError: (NSError *)error
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+
+        NSLog(error.localizedDescription);
+        
+        
+    });
+}
+
 - (void) LiveConnectionStreamStatus:(struct StreamStatus_s) state{
     
     //NSLog(@"\nbitrate:%fkb/s lost frame:%f(%f%%)", state.allBitrate/1000, state.lostVideoFrame, state.lostVideoFrameRate);
