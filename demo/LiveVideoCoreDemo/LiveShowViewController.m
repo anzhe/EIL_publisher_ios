@@ -16,6 +16,7 @@
     UILabel*  _RtmpStatusLabel;
     UILabel*  _StreamStatusLabel;
     UIButton* _FilterButton;
+    UIButton* _RecordButton;
     UIButton* _CameraChangeButton;
     XMNShareView* _FilterMenu;
     ASValueTrackingSlider* _MicSlider;
@@ -77,6 +78,20 @@
     [_StreamStatusLabel setTextColor:[UIColor whiteColor]];
     _StreamStatusLabel.text = @"Stream状态: ";
     [self.view addSubview:_StreamStatusLabel];
+    
+    float fRecordButtonW = 50;
+    float fRecordButtonH = 30;
+    float fRecordButtonX = fScreenW/2-fRecordButtonW-60;
+    float fRecordButtonY = fScreenH - fRecordButtonH - 10;
+    _RecordButton = [[UIButton alloc] initWithFrame:CGRectMake(fRecordButtonX, fRecordButtonY, fRecordButtonW, fRecordButtonH)];
+    _RecordButton.backgroundColor = [UIColor blueColor];
+    _RecordButton.layer.masksToBounds = YES;
+    _RecordButton.layer.cornerRadius  = 5;
+    [_RecordButton setTitle:@"开始录像" forState:UIControlStateNormal];
+    [_RecordButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    _RecordButton.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:12];
+    [_RecordButton addTarget:self action:@selector(OnRecordClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_RecordButton];
     
     float fFilterButtonW = 50;
     float fFilterButtonH = 30;
@@ -193,6 +208,23 @@
     }else{
         [_CameraChangeButton setTitle:@"后置镜头" forState:UIControlStateNormal];
     }
+}
+
+-(void) OnRecordClicked:(id)sender
+{
+    
+    static bool bState = false;
+    
+    if(bState==false){
+        [[LiveVideoCoreSDK sharedinstance] EILStartRecord];
+        bState = true;
+        [_RecordButton setTitle:@"关闭录像" forState:UIControlStateNormal];
+    }else{
+        [[LiveVideoCoreSDK sharedinstance] EILStopRecord];
+        bState = false;
+        [_RecordButton setTitle:@"开始录像" forState:UIControlStateNormal];
+    }
+
 }
 
 -(void) OnFilterClicked:(id)sender{

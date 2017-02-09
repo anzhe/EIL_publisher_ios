@@ -160,6 +160,8 @@ struct StreamStatus_s
                     andStreamKey:(NSString*) streamKey;
 
 - (void) endRtmpSession;
+- (void) startRecord;
+- (void) stopRecord;
 
 - (void) getCameraPreviewLayer: (AVCaptureVideoPreviewLayer**) previewLayer;
 

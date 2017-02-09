@@ -88,6 +88,9 @@ typedef NS_ENUM(NSUInteger, LIVE_FILTER_TYPE) {
 - (void)EILSetWatermark:(UIImage*)image withRect:(CGRect)rect;
 - (void)EILCloseWatermark;
 
+- (void)EILStartRecord;
+- (void)EILStopRecord;
+
 - (void)EILFocuxAtPoint:(CGPoint)point;
 //VCSessionDelegate protocal
 - (void) connectionStatusChanged: (VCSessionState) sessionState;
