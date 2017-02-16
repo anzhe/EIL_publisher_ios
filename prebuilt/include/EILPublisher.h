@@ -91,6 +91,12 @@ typedef NS_ENUM(NSUInteger, LIVE_FILTER_TYPE) {
 - (void)EILStartRecord;
 - (void)EILStopRecord;
 
+- (void)EILOpenTorch;
+- (void)EILCloseTorch;
+
+- (void)EILOpenMute;
+- (void)EILCloseMute;
+
 - (void)EILFocuxAtPoint:(CGPoint)point;
 //VCSessionDelegate protocal
 - (void) connectionStatusChanged: (VCSessionState) sessionState;

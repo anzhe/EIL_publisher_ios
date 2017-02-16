@@ -143,6 +143,7 @@
 }
 
 -(void)OnStartLiveClicked:(id)sender{
+    
     NSLog(@"Start live Rtmp:%@", _RtmpUrlTextField.text);
     
     if([_RtmpUrlTextField.text length] == 0)
@@ -177,9 +178,10 @@
     [self UIInit];
     
     //rtmp://pili-live-rtmp.qdtong.net/leju-live-2/faf0c4
-    //_RtmpUrlTextField.text = @"rtmp://pili-publish.qdtong.net/leju-live-2/587715cf695d6?key=c68aee4f1df7612a&token=ejutest";
-    _RtmpUrlTextField.text = @"rtmp://ossrs.net/live/mao5";
+    //_RtmpUrlTextField.text = @"rtmp://pili-publish.qdtong.net/leju-live-2/587c3f81d0c82?key=d10599c05a8e722b&token=ejutest";
+    _RtmpUrlTextField.text = @"rtmp://ossrs.net/live/mao35";
     //_RtmpUrlTextField.text = @"rtmp://rtmppush.ejucloud.com/ehoush/sample";
+    //_RtmpUrlTextField.text = @"rtmp://192.168.1.104/mao/test";
 }
 
 - (void)didReceiveMemoryWarning {

@@ -328,7 +328,7 @@
 				TargetAttributes = {
 					B782800E1C86C95E0057E507 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = CZ7GA738H6;
+						DevelopmentTeam = T8W3UWR77W;
 					};
 					B78280271C86C95E0057E507 = {
 						CreatedOnToolsVersion = 7.2;
@@ -541,13 +541,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = CZ7GA738H6;
+				DEVELOPMENT_TEAM = T8W3UWR77W;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = ../prebuilt/include;
 				INFOPLIST_FILE = LiveVideoCoreDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = ../prebuilt/libs;
-				PRODUCT_BUNDLE_IDENTIFIER = ba.app1;
+				PRODUCT_BUNDLE_IDENTIFIER = mao.app1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -557,13 +557,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = CZ7GA738H6;
+				DEVELOPMENT_TEAM = T8W3UWR77W;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = ../prebuilt/include;
 				INFOPLIST_FILE = LiveVideoCoreDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = ../prebuilt/libs;
-				PRODUCT_BUNDLE_IDENTIFIER = ba.app1;
+				PRODUCT_BUNDLE_IDENTIFIER = mao.app1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

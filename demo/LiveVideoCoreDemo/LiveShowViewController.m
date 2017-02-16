@@ -17,6 +17,8 @@
     UILabel*  _StreamStatusLabel;
     UIButton* _FilterButton;
     UIButton* _RecordButton;
+    UIButton* _TorchButton;
+    UIButton* _MuteButton;
     UIButton* _CameraChangeButton;
     XMNShareView* _FilterMenu;
     ASValueTrackingSlider* _MicSlider;
@@ -92,6 +94,36 @@
     _RecordButton.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:12];
     [_RecordButton addTarget:self action:@selector(OnRecordClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_RecordButton];
+    
+    
+    float fTorchButtonW = 50;
+    float fTorchButtonH = 30;
+    float fTorchButtonX = fScreenW/2-fTorchButtonW-60;
+    float fTorchButtonY = fScreenH - fTorchButtonH - 80;
+    _TorchButton = [[UIButton alloc] initWithFrame:CGRectMake(fTorchButtonX, fTorchButtonY, fTorchButtonW, fTorchButtonH)];
+    _TorchButton.backgroundColor = [UIColor blueColor];
+    _TorchButton.layer.masksToBounds = YES;
+    _TorchButton.layer.cornerRadius  = 5;
+    [_TorchButton setTitle:@"打开灯" forState:UIControlStateNormal];
+    [_TorchButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    _TorchButton.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:12];
+    [_TorchButton addTarget:self action:@selector(OnTorchClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_TorchButton];
+
+    float fMuteButtonW = 50;
+    float fMuteButtonH = 30;
+    float fMuteButtonX = fScreenW/2-fMuteButtonW-5;
+    float fMuteButtonY = fScreenH - fMuteButtonH - 80;
+    _MuteButton = [[UIButton alloc] initWithFrame:CGRectMake(fMuteButtonX, fMuteButtonY, fMuteButtonW, fMuteButtonH)];
+    _MuteButton.backgroundColor = [UIColor blueColor];
+    _MuteButton.layer.masksToBounds = YES;
+    _MuteButton.layer.cornerRadius  = 5;
+    [_MuteButton setTitle:@"开静音" forState:UIControlStateNormal];
+    [_MuteButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    _MuteButton.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:12];
+    [_MuteButton addTarget:self action:@selector(OnMuteClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_MuteButton];
+    
     
     float fFilterButtonW = 50;
     float fFilterButtonH = 30;
@@ -225,6 +257,40 @@
         [_RecordButton setTitle:@"开始录像" forState:UIControlStateNormal];
     }
 
+}
+
+-(void) OnTorchClicked:(id)sender
+{
+    
+    static bool bState = false;
+    
+    if(bState==false){
+        [[LiveVideoCoreSDK sharedinstance] EILOpenTorch];
+        bState = true;
+        [_TorchButton setTitle:@"关闭灯" forState:UIControlStateNormal];
+    }else{
+        [[LiveVideoCoreSDK sharedinstance] EILCloseTorch];
+        bState = false;
+        [_TorchButton setTitle:@"打开灯" forState:UIControlStateNormal];
+    }
+    
+}
+
+-(void) OnMuteClicked:(id)sender
+{
+    
+    static bool bState = false;
+    
+    if(bState==false){
+        [[LiveVideoCoreSDK sharedinstance] EILOpenMute];
+        bState = true;
+        [_MuteButton setTitle:@"关静音" forState:UIControlStateNormal];
+    }else{
+        [[LiveVideoCoreSDK sharedinstance] EILCloseMute];
+        bState = false;
+        [_MuteButton setTitle:@"开静音" forState:UIControlStateNormal];
+    }
+    
 }
 
 -(void) OnFilterClicked:(id)sender{
@@ -484,9 +550,11 @@
 
 - (void)dealSingleTap:(UITapGestureRecognizer *)tap
 {
+#if 0
     CGPoint point = [tap locationInView:self.view];
     [[LiveVideoCoreSDK sharedinstance] EILFocuxAtPoint:point];
     [self runBoxAnimationOnView:_focusBox point:point];
+#endif
 }
 //对焦的动画效果
 - (void)runBoxAnimationOnView:(UIView *)view point:(CGPoint)point {

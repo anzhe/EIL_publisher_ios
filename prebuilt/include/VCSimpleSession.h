@@ -162,6 +162,8 @@ struct StreamStatus_s
 - (void) endRtmpSession;
 - (void) startRecord;
 - (void) stopRecord;
+- (void) openMute;
+- (void) closeMute;
 
 - (void) getCameraPreviewLayer: (AVCaptureVideoPreviewLayer**) previewLayer;
 
