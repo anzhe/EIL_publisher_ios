@@ -27,6 +27,8 @@ EIL易居互动直播云平台采集推流IOS SDK使用说明
 ##### 1.将prebuilt/include目录路径加入到工程的“Header Search Paths”中
 ##### 2.将prebuilt/libeilpublisher.a加入工程
 ##### 3.将以下系统库加入工程
+* libiconv.tbd
+* libbz2.tbd
 * libz.tbd  
 * libstdc++.tbd  
 * CoreMedia.framework  
